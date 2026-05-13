@@ -1,4 +1,3 @@
-
 # ------------------------------------------------------------------------------
 # STEP 1: INSTALL AND LOAD REQUIRED LIBRARIES
 # ------------------------------------------------------------------------------
@@ -12,7 +11,7 @@ library(scales)      # For clean number formats (e.g., adding commas to prices)
 # ------------------------------------------------------------------------------
 # STEP 2: DATA LOADING & EXAMINING STRUCTURE
 # ------------------------------------------------------------------------------
-raw_car_data <- read.csv("CAR DETAILS FROM CAR DEKHO.csv", stringsAsFactors = FALSE)
+raw_car_data <- read.csv("car details v4.csv", stringsAsFactors = FALSE)
 
 cat("--- Raw Data Structure Preview ---\n")
 str(raw_car_data)
@@ -33,21 +32,23 @@ cleaned_car_data <- raw_car_data %>%
   distinct() %>%
   
   # 2. Outlier/Sanity Filter: Filter out any unrealistic km readings
-  filter(km_driven < 500000) %>%
+  filter(Kilometer < 500000) %>%
   
   # 3. Feature Engineering - Vehicle Age: Convert 'year' into an actionable 'car_age' column
-  mutate(car_age = 2026 - year) %>%
+  mutate(car_age = 2026 - Year) %>%
   
   # 4. Feature Engineering - Brand Extraction: Take the first word from the 'name' column
-  mutate(brand = sapply(strsplit(name, " "), `[`, 1)) %>%
+  mutate(brand = Make) %>%
   
   # 5. Data Type Formatting: Convert textual descriptions into categorical Factors
   mutate(
-    fuel = as.factor(fuel),
-    seller_type = as.factor(seller_type),
-    transmission = as.factor(transmission),
-    owner = as.factor(owner),
-    brand = as.factor(brand)
+    fuel = as.factor(Fuel.Type),
+    seller_type = as.factor(Seller.Type),
+    transmission = as.factor(Transmission),
+    owner = as.factor(Owner),
+    brand = as.factor(brand),
+    selling_price = Price,
+    km_driven = Kilometer
   )
 
 cat("\n--- Cleaned Data Summary ---\n")
