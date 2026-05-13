@@ -1,14 +1,7 @@
-# ==============================================================================
-# BIG DATA ANALYTICS PROJECT: USED CAR PRICE PREDICTION
-# Dataset: CAR DETAILS FROM CAR DEKHO.csv
-# Language: R 
-# ==============================================================================
 
 # ------------------------------------------------------------------------------
 # STEP 1: INSTALL AND LOAD REQUIRED LIBRARIES
 # ------------------------------------------------------------------------------
-# If you don't have these packages installed yet, uncomment the line below and run it once:
-# install.packages(c("tidyverse", "caret", "rpart", "rpart.plot", "scales"))
 
 library(tidyverse)   # Data manipulation (dplyr) and visualization (ggplot2)
 library(caret)       # Machine learning utilities (data splitting, evaluation)
@@ -19,7 +12,6 @@ library(scales)      # For clean number formats (e.g., adding commas to prices)
 # ------------------------------------------------------------------------------
 # STEP 2: DATA LOADING & EXAMINING STRUCTURE
 # ------------------------------------------------------------------------------
-# Load the dataset. (Ensure this file is sitting in your RStudio Project folder!)
 raw_car_data <- read.csv("CAR DETAILS FROM CAR DEKHO.csv", stringsAsFactors = FALSE)
 
 cat("--- Raw Data Structure Preview ---\n")
@@ -58,7 +50,6 @@ cleaned_car_data <- raw_car_data %>%
     brand = as.factor(brand)
   )
 
-# Verify structural adjustments
 cat("\n--- Cleaned Data Summary ---\n")
 summary(cleaned_car_data)
 
